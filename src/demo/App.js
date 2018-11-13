@@ -1,17 +1,18 @@
 import React from 'react';
 import { Admin, Resource } from 'react-admin';
 import { RestProvider, base64Uploader } from '../lib';
-import { DriverList, DriverEdit, DriverCreate } from './Drivers';
+import { DriverList, DriverEdit, DriverCreate, DriverShow } from './Drivers';
 import { RidersList, RidersEdit, RidersCreate } from './Riders';
 import { TripList } from './Trip';
+import Dashboard from './Dashboard';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCXZiERpF2DscCApxbRca9Y7UtglIdc-G8',
-  authDomain: 'alpharides-f115c.firebaseapp.com',
-  databaseURL: 'https://alpharides-f115c.firebaseio.com/',
-  projectId: 'alpharides-f115c',
-  storageBucket: 'alpharides-f115c.appspot.com',
-  messagingSenderId: '38995523207'
+    apiKey: 'AIzaSyCXZiERpF2DscCApxbRca9Y7UtglIdc-G8',
+    authDomain: 'alpharides-f115c.firebaseapp.com',
+    databaseURL: 'https://alpharides-f115c.firebaseio.com/',
+    projectId: 'alpharides-f115c',
+    storageBucket: 'alpharides-f115c.appspot.com',
+    messagingSenderId: '38995523207'
 };
 
 const trackedResources = [{ name: 'user', isPublic: true }, { name: 'drivers', isPublic: true }, { name: 'DriversWorking', isPublic: true }];
@@ -20,10 +21,10 @@ const trackedResources = [{ name: 'user', isPublic: true }, { name: 'drivers', i
 
 const dataProvider = base64Uploader(RestProvider(firebaseConfig, { trackedResources }));
 const App = () => (
-  <Admin dataProvider={dataProvider}>
-    <Resource name="user" list={RidersList} edit={RidersEdit} create={RidersCreate} />
-    <Resource name="drivers" list={DriverList} edit={DriverEdit} create={DriverCreate} />
-    <Resource name="DriversWorking" list={TripList} />
-  </Admin>
+    <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+        <Resource name="user" list={RidersList} edit={RidersEdit} create={RidersCreate} />
+        <Resource name="drivers" list={DriverList} show={DriverShow} edit={DriverEdit} create={DriverCreate} />
+        <Resource name="DriversWorking" list={TripList} />
+    </Admin>
 );
 export default App;
