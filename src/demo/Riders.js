@@ -9,11 +9,23 @@ import {
     SimpleForm,
     TextInput,
     ImageInput,
-    ImageField
+    ImageField,
+    Filter,
+    SearchInput
 } from 'react-admin';
 
+
+const RiderFilter = props => (
+    <Filter {...props}>
+        <SearchInput source="q" alwaysOn />
+    </Filter>
+);
+
 export const RidersList = props => (
-    <List title="All Riders" {...props}>
+    <List
+        title="All Riders" {...props}
+        filters={<RiderFilter />}
+    >
         <Datagrid>
             <TextField source="id" />
             <TextField source="details.Name" />

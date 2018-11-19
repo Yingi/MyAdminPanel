@@ -8,6 +8,7 @@ import {
     EditButton,
     SimpleForm,
     TextInput,
+    SearchInput,
     ImageInput,
     ImageField,
     Show,
@@ -19,7 +20,7 @@ import {
 
 const DriverFilter = props => (
     <Filter {...props}>
-        <TextInput label="Search" source="Name" alwaysOn />
+        <SearchInput source="q" alwaysOn />
     </Filter>
 );
 
